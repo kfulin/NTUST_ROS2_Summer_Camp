@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<robot name="myfirst">
+
+  <!-- base -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.6" radius="0.1"/>
+      </geometry>
+      <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.6" radius="0.1"/>
+      </geometry>
+      <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    </collision>
+  </link>
+
+  <!-- link 1 -->
+  <link name="link1">
+    <visual>
+      <geometry>
+        <cylinder length="0.3" radius="0.2"/>
+      </geometry>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.3" radius="0.2"/>
+      </geometry>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+    </collision>
+  </link>
+
+  <!-- link 2 -->
+  <link name="link2">
+    <visual>
+      <geometry>
+        <cylinder length="0.6" radius="0.1"/>
+      </geometry>
+      <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.6" radius="0.1"/>
+      </geometry>
+      <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    </collision>
+  </link>
+
+    <!-- link 3 -->
+  <link name="link3">
+    <visual>
+      <geometry>
+        <cylinder length="0.6" radius="0.1"/>
+      </geometry>
+      <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.6" radius="0.1"/>
+      </geometry>
+      <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    </collision>
+  </link>
+
+  <!-- GRIPPER -->
+
+<link name="gripper_base">
+  <visual>
+    <geometry>
+      <box size="0.1 0.1 0.1"/>
+    </geometry>
+  </visual>
+  <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+  </collision>
+</link>
+
+<link name="finger_left">
+  <visual>
+    <geometry>
+      <box size="0.1 0.02 0.1"/>
+    </geometry>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+  </visual>
+  <collision>
+      <geometry>
+        <box size="0.1 0.02 0.1"/>
+      </geometry>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+  </collision>
+</link>
+
+<link name="finger_right">
+  <visual>
+    <geometry>
+      <box size="0.1 0.02 0.1"/>
+    </geometry>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+  </visual>
+  <collision>
+      <geometry>
+        <box size="0.1 0.02 0.1"/>
+      </geometry>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+  </collision>
+</link>
+
+  <!-- joint 1 -->
+  <joint name="joint1" type="revolute">
+    <parent link="base_link"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0.6" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" effort="1" velocity="1"/>
+  </joint>
+
+  <!-- joint 2 -->
+  <joint name="joint2" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-3.14" upper="3.14" effort="1" velocity="1"/>
+  </joint>
+
+  <!-- joint 3 -->
+  <joint name="joint3" type="revolute">
+    <parent link="link2"/>
+    <child link="link3"/>
+    <origin xyz="0 0 0.6" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-3.14" upper="3.14" effort="1" velocity="1"/>
+  </joint>
+
+  <!-- joint 4 -->
+  <joint name="joint4" type="revolute">
+  <parent link="link3"/>
+  <child link="gripper_base"/>
+  <origin xyz="0 0 0.65" rpy="0 0 0"/>
+  <axis xyz="0 0 1"/>
+  <limit lower="-3.14" upper="3.14" effort="1" velocity="1"/>
+</joint>
+
+  <joint name="finger_left_joint" type="prismatic">
+    <parent link="gripper_base"/>
+    <child link="finger_left"/>
+    <origin xyz="0 0.05 0.05" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0" upper="0.04" effort="1" velocity="1"/>
+  </joint>
+
+  <joint name="finger_right_joint" type="prismatic">
+    <parent link="gripper_base"/>
+    <child link="finger_right"/>
+    <origin xyz="0 -0.05 0.05" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="0" upper="0.04" effort="1" velocity="1"/>
+  </joint>
+
+  
+</robot>
