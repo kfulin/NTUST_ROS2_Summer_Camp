@@ -16,10 +16,10 @@
   </node>
 
   <!-- joint GUI -->
-<!--   <node pkg="joint_state_publisher_gui"
+  <node pkg="joint_state_publisher_gui"
         exec="joint_state_publisher_gui"
         name="joint_state_publisher_gui"
-        output="screen"/> -->
+        output="screen"/>
 
   <node pkg="my_package"
         exec="my_node"
