@@ -3,18 +3,18 @@ controller_manager:
   ros__parameters:
     update_rate: 100  # Hz
 
-    Arm_controller:
+    arm_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
 
-    Gripper_controller:
+    gripper_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-Arm_controller:
+arm_controller:
   ros__parameters:
     joints:
       - joint1
@@ -26,9 +26,10 @@ Arm_controller:
     state_interfaces:
       []
     allow_nonzero_velocity_at_trajectory_end: true
-Gripper_controller:
+gripper_controller:
   ros__parameters:
     joints:
+      - joint4
       - finger_left_joint
       - finger_right_joint
     command_interfaces:

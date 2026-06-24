@@ -1,0 +1,30 @@
+<launch>
+
+  <!-- ========================= -->
+  <!-- World -->
+  <!-- ========================= -->
+  <arg name="world"
+       default="$(find-pkg-share myfirst_gazebo)/worlds/empty.world"/>
+
+  <!-- ========================= -->
+  <!-- Gazebo Sim (Server + Client) -->
+  <!-- ========================= -->
+  <include file="$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py">
+
+    <!-- VirtualBox requirement -->
+    <arg name="gz_args"
+         value="$(var world) -g --render-engine ogre"/>
+
+    <arg name="on_exit_shutdown" value="True"/>
+
+  </include>
+
+  <!-- ========================= -->
+  <!-- ros_gz_bridge (YAML version) -->
+  <!-- ========================= -->
+  <node pkg="ros_gz_bridge"
+        exec="parameter_bridge"
+        output="screen"
+        args="--config $(find-pkg-share myfirst_gazebo)/config/bridge.yaml"/>
+
+</launch>

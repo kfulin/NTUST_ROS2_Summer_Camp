@@ -1,0 +1,50 @@
+<launch>
+
+  <!-- ========================= -->
+  <!-- robot_description (xacro) -->
+  <!-- ========================= -->
+  <param name="robot_description"
+         value="$(command 'xacro $(find-pkg-share myfirst_moveit_config)/urdf/myfirst.urdf.xacro')"
+         type="str" />
+
+  <!-- ========================= -->
+  <!-- robot_state_publisher -->
+  <!-- ========================= -->
+  <node pkg="robot_state_publisher"
+        exec="robot_state_publisher"
+        name="robot_state_publisher"
+        output="screen">
+    <param name="use_sim_time" value="true"/>
+  </node>
+
+  <!-- ========================= -->
+  <!-- Spawn robot into Gazebo -->
+  <!-- ========================= -->
+  <node pkg="ros_gz_sim"
+        exec="create"
+        name="spawn_entity"
+        output="screen"
+        arguments="-topic /robot_description -name myfirst_robot" />
+
+  <!-- ========================= -->
+  <!-- Joint State Broadcaster -->
+  <!-- ========================= -->
+  <node pkg="controller_manager"
+        exec="spawner"
+        name="joint_state_broadcaster_spawner"
+        output="screen"
+        arguments="joint_state_broadcaster" />
+
+  <!-- ========================= -->
+  <!-- RViz2 -->
+  <!-- ========================= -->
+  <node pkg="rviz2"
+        exec="rviz2"
+        name="rviz2"
+        output="screen"
+        arguments="-d $(find-pkg-share myfirst_moveit_config)/config/moveit.rviz">
+
+    <param name="use_sim_time" value="true"/>
+  </node>
+
+</launch>
